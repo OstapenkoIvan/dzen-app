@@ -1,22 +1,27 @@
-export const navLinks = [
+export const NAVLINKS = [
   {
     name: "Приходы",
+    route: "orders",
     to: "/",
   },
   {
     name: "Группы",
-    to: "/",
+    route: "groups",
+    to: "/groups",
   },
   {
     name: "Продукты",
-    to: "/",
+    route: "products",
+    to: "/products",
   },
   {
     name: "Пользователи",
-    to: "/",
+    route: "user",
+    to: "/user",
   },
   {
     name: "Настройки",
-    to: "/",
+    route: "settings",
+    to: "/settings",
   },
 ];
