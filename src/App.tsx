@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Container, CssBaseline, Box } from "@mui/material";
 
 import TopMenu from "./modules/components/TopMenu";
+import NavigationMenu from "./modules/components/NavigationMenu";
 
 import "./App.css";
-import { width } from "@mui/system";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         }}
       >
         <TopMenu />
+        <NavigationMenu />
       </Container>
     </>
   );

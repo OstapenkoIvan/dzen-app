@@ -13,8 +13,8 @@ function TopMenu() {
       <Toolbar
         disableGutters
         sx={{
-          paddingX: 8,
-          paddingY: 2,
+          px: 8,
+          py: 2,
           backgroundColor: "#fff",
           boxShadow: "0px 8px 30px 0px rgba(0,0,0,0.64)",
         }}
