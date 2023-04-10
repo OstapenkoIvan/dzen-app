@@ -1,13 +1,7 @@
-import { forwardRef, useState, useRef } from "react";
+import { forwardRef } from "react";
 import { NavLink as NavLinkBase } from "react-router-dom";
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-} from "@mui/material";
-import { NAVLINKS, ROUTES } from "../../../constants";
+import { List, ListItem, ListItemText, Toolbar } from "@mui/material";
+import { NAVLINKS } from "../../../constants";
 import UserAvatar from "../UserAvatar";
 
 import "./NavigationMenu.css";
