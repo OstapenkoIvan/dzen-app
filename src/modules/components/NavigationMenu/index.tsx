@@ -1,5 +1,5 @@
 import { forwardRef, useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink as NavLinkBase } from "react-router-dom";
 import {
   List,
   ListItem,
@@ -7,8 +7,14 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
-import { navLinks } from "../../../constants";
+import { NAVLINKS, ROUTES } from "../../../constants";
 import UserAvatar from "../UserAvatar";
+
+import "./NavigationMenu.css";
+
+const NavLink = forwardRef<any, any>((props, ref) => (
+  <NavLinkBase ref={ref} {...props} className={props.activeClassName} />
+));
 
 function NavigationMenu() {
   return (
@@ -28,19 +34,27 @@ function NavigationMenu() {
         <UserAvatar />
         <List
           sx={{
+            display: "flex",
+            flexDirection: "column",
             width: "100%",
             textAlign: "center",
+            gap: 1,
           }}
         >
-          {navLinks.map((link) => (
-            <ListItem disablePadding key={link.name}>
-              <ListItemButton
-                component="a"
-                href={link.to}
-                sx={{ textAlign: "center" }}
-              >
-                <ListItemText primary={link.name} />
-              </ListItemButton>
+          {NAVLINKS.map((link) => (
+            <ListItem
+              disablePadding
+              key={link.name}
+              component={NavLink}
+              to={link.to}
+              activeClassName={({ isActive }: { isActive: boolean }) =>
+                isActive ? "activeLink" : "notActiveLink"
+              }
+              sx={{
+                textAlign: "center",
+              }}
+            >
+              <ListItemText primary={link.name} sx={{ width: "fit-content" }} />
             </ListItem>
           ))}
         </List>
