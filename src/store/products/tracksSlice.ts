@@ -61,6 +61,44 @@ export const productsInitialState: IInitialProductsState = {
       order: 2,
       date: "2017-06-29 12:09:33",
     },
+    {
+      id: 3,
+      serialNumber: 1234,
+      isNew: 0,
+      photo: "pathToFile.jpg",
+      title: "Product 1",
+      type: "Monitors",
+      specification: "Specification 1",
+      guarantee: {
+        start: "2017-06-29 12:09:33",
+        end: "2017-06-29 12:09:33",
+      },
+      price: [
+        { value: 100, symbol: "USD", isDefault: 0 },
+        { value: 2600, symbol: "UAH", isDefault: 1 },
+      ],
+      order: 2,
+      date: "2017-06-29 12:09:33",
+    },
+    {
+      id: 4,
+      serialNumber: 1234,
+      isNew: 1,
+      photo: "pathToFile.jpg",
+      title: "Product 1",
+      type: "Monitors",
+      specification: "Specification 1",
+      guarantee: {
+        start: "2017-06-29 12:09:33",
+        end: "2017-06-29 12:09:33",
+      },
+      price: [
+        { value: 100, symbol: "USD", isDefault: 0 },
+        { value: 2600, symbol: "UAH", isDefault: 1 },
+      ],
+      order: 3,
+      date: "2017-06-29 12:09:33",
+    },
   ],
 };
 // export const productsInitialState: IInitialProductsState = {
@@ -72,10 +110,6 @@ const productsSlice = createSlice({
   name: "products",
   initialState: productsInitialState,
   reducers: {
-    showSelected(state, { payload }) {
-      const current = state.data.find((item) => item.Number === payload);
-      state.current = current as ITracksState;
-    },
     addProduct(state, { payload }) {
       state.products = { ...state.products, payload };
     },
@@ -93,11 +127,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const {
-  showSelected,
-  addProduct,
-  addOrder,
-  removeProduct,
-  removeOrder,
-} = productsSlice.actions;
+export const { addProduct, addOrder, removeProduct, removeOrder } =
+  productsSlice.actions;
 export const productsReducer = productsSlice.reducer;

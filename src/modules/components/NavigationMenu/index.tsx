@@ -16,9 +16,9 @@ function NavigationMenu() {
       <Toolbar
         disableGutters
         sx={{
-          px: 1,
-          py: 3,
-          backgroundColor: "#F1F1F1",
+          px: 2,
+          pt: 10,
+          backgroundColor: "#fff",
           height: "100%",
           width: "200px",
           alignItems: "center",

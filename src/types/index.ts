@@ -1,29 +1,35 @@
 export interface IOrder {
-  id: Number;
-  title: String;
-  date: String;
-  description: String;
+  id: number;
+  title: string;
+  date: string;
+  description: string;
 }
 export interface IProduct {
-  id: Number;
-  serialNumber: Number;
+  id: number;
+  serialNumber: number;
   isNew: 0 | 1;
-  photo: String;
-  title: String;
-  type: String;
-  specification: String;
+  photo: string;
+  title: string;
+  type: string;
+  specification: string;
   guarantee: {
-    start: String;
-    end: String;
+    start: string;
+    end: string;
   };
   price: [
-    { value: Number; symbol: "USD" | "UAH"; isDefault: 0 | 1 },
-    { value: Number; symbol: "USD" | "UAH"; isDefault: 0 | 1 }
+    { value: number; symbol: "USD" | "UAH"; isDefault: 0 | 1 },
+    { value: number; symbol: "USD" | "UAH"; isDefault: 0 | 1 }
   ];
-  order: Number;
-  date: String;
+  order: number;
+  date: string;
 }
 export interface IInitialProductsState {
   orders: IOrder[];
   products: IProduct[];
+}
+
+export interface IOrderItem {
+  order: IOrder;
+  price: { USD?: number | undefined; UAH?: number | undefined };
+  productsCount: number;
 }

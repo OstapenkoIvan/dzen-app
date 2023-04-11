@@ -10,8 +10,8 @@ import ErrorBoundary from "../../modules/components/ErrorBoundaries";
 import SharedLayout from "../../modules/pages/SharedLayout";
 import Orders from "../../modules/components/Orders";
 import Products from "../../modules/components/Products";
-Orders;
-Products;
+import OrderProducList from "../../modules/components/OrderProductList";
+
 import { ROUTES } from "../../constants";
 
 // TODO add lazyload and suspense
@@ -24,6 +24,14 @@ export const mainRouter = createBrowserRouter(
         element={
           <ErrorBoundary>
             <Orders />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path={ROUTES.orderId}
+        element={
+          <ErrorBoundary>
+            <OrderProducList />
           </ErrorBoundary>
         }
       />

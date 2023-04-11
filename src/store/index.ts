@@ -22,7 +22,7 @@ const persistSession = {
 
 const store = configureStore({
   reducer: {
-    tracks: persistReducer<IInitialProductsState, any>(
+    products: persistReducer<IInitialProductsState, any>(
       persistSession,
       productsReducer
     ),
