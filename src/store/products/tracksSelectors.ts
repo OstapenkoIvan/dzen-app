@@ -1,5 +1,9 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../index";
 
-export const tracksSelector = (state: RootState) => state.tracks.data;
-export const lastTrackSelector = (state: RootState) => state.tracks.data[0];
-export const currentTrackSelector = (state: RootState) => state.tracks.current;
+export const ordersSelector = (state: RootState) => state.products.orders;
+export const productsSelector = (state: RootState) => state.products.products;
+export const ordersProductSelector = (id: number) =>
+  createSelector([productsSelector], (products) => {
+    return products.filter((product) => product.order === id);
+  });

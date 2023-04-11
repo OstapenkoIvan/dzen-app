@@ -17,6 +17,7 @@ function SharedLayout() {
         disableGutters
         sx={{
           bgcolor: "#cfe8fc",
+
           height: "100vh",
           width: "100vw",
         }}
@@ -24,7 +25,19 @@ function SharedLayout() {
         <TopMenu />
         <Box sx={{ height: "100%", display: "flex" }}>
           <NavigationMenu />
-          <Outlet />
+          <Box
+            sx={{
+              display: "flex",
+              minWidth: "fit-content",
+              flex: 1,
+              flexDirection: "column",
+              pt: 14,
+              px: 3,
+              backgroundColor: "#FBDBAF",
+            }}
+          >
+            <Outlet />
+          </Box>
         </Box>
       </Container>
     </>

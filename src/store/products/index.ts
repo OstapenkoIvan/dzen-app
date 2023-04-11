@@ -1,13 +1,12 @@
 export {
   productsReducer,
-  showSelected,
   addProduct,
   addOrder,
   removeProduct,
   removeOrder,
 } from "./tracksSlice";
 export {
-  tracksSelector,
-  lastTrackSelector,
-  currentTrackSelector,
+  ordersSelector,
+  productsSelector,
+  ordersProductSelector,
 } from "./tracksSelectors";

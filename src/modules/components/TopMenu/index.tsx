@@ -17,6 +17,11 @@ function TopMenu() {
           py: 2,
           backgroundColor: "#fff",
           boxShadow: "0px 8px 30px 0px rgba(0,0,0,0.64)",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 1,
         }}
       >
         <Button sx={{ color: "inherit", display: "flex", gap: 2 }}>

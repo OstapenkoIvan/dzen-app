@@ -20,7 +20,7 @@ function UserAvatar() {
       badgeContent={
         <button
           onClick={handleClick}
-          style={{ background: "none", border: "none" }}
+          style={{ background: "none", border: "none", cursor: "pointer" }}
         >
           <SettingsIcon />
           <input
