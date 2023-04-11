@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ListItem,
   ListItemText,
@@ -13,19 +14,18 @@ import { IOrderItem } from "../../../types";
 import { getNoun } from "../../../helpers/getNoun";
 import { removeOrder } from "../../../store/products";
 import { useAppDispatch } from "../../../hooks/redux";
+import { getOrderDate } from "../../../helpers/getDate";
+import ModalComponent from "../ModalComponent";
 
 function OrderItem({ order, price, productsCount }: IOrderItem) {
+  const [modalState, setModalState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const currentDate = new Date(order.date);
-  const day = currentDate.getDate();
-  const month = new Intl.DateTimeFormat("ru", { month: "long" }).format(
-    currentDate
-  );
-  const year = currentDate.getFullYear();
+  const { day, month, year } = getOrderDate(order.date);
 
   const handleDelete = () => {
-    dispatch(removeOrder(order.id));
+    setModalState(true);
+    // dispatch(removeOrder(order.id));
   };
 
   return (
@@ -97,6 +97,9 @@ function OrderItem({ order, price, productsCount }: IOrderItem) {
       <IconButton aria-label="delete order" size="small" onClick={handleDelete}>
         <DeleteIcon fontSize="small" />
       </IconButton>
+      {modalState && (
+        <ModalComponent onClose={setModalState} order={order} price={price} />
+      )}
     </ListItem>
   );
 }
