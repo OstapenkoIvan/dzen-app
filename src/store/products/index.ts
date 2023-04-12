@@ -1,10 +1,4 @@
-export {
-  productsReducer,
-  addProduct,
-  addOrder,
-  removeProduct,
-  removeOrder,
-} from "./tracksSlice";
+export { productsReducer, removeProduct, removeOrder } from "./tracksSlice";
 export {
   ordersSelector,
   productsSelector,

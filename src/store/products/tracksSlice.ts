@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IInitialProductsState } from "./../../types";
 
+// export const productsInitialState: IInitialProductsState = {
+//   orders: [],
+//   products: [],
+// };
+
 export const productsInitialState: IInitialProductsState = {
   orders: [
     {
@@ -120,21 +125,11 @@ export const productsInitialState: IInitialProductsState = {
     },
   ],
 };
-// export const productsInitialState: IInitialProductsState = {
-//   orders: [],
-//   products: [],
-// };
 
 const productsSlice = createSlice({
   name: "products",
   initialState: productsInitialState,
   reducers: {
-    addProduct(state, { payload }) {
-      state.products = { ...state.products, payload };
-    },
-    addOrder(state, { payload }) {
-      state.orders = { ...state.orders, payload };
-    },
     removeProduct(state, { payload }) {
       state.products = state.products.filter(
         (product) => product.id !== payload
@@ -146,6 +141,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { addProduct, addOrder, removeProduct, removeOrder } =
-  productsSlice.actions;
+export const { removeProduct, removeOrder } = productsSlice.actions;
 export const productsReducer = productsSlice.reducer;
