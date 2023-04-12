@@ -25,7 +25,9 @@ function OrderProducList() {
   const productTypes = Array.from(
     new Set(products.map((product: IProduct) => product.type))
   );
-  const filteredProducts = products.filter((product) => product.type === type);
+  const filteredProducts = type
+    ? products.filter((product) => product.type === type)
+    : products;
 
   const handleChange = (e: SelectChangeEvent) => {
     setType(e.target.value as string);

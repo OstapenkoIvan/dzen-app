@@ -12,20 +12,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { IOrderItem } from "../../../types";
 import { getNoun } from "../../../helpers/getNoun";
-import { removeOrder } from "../../../store/products";
-import { useAppDispatch } from "../../../hooks/redux";
 import { getOrderDate } from "../../../helpers/getDate";
 import ModalComponent from "../ModalComponent";
 
 function OrderItem({ order, price, productsCount }: IOrderItem) {
   const [modalState, setModalState] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const { day, month, year } = getOrderDate(order.date);
 
   const handleDelete = () => {
     setModalState(true);
-    // dispatch(removeOrder(order.id));
   };
 
   return (

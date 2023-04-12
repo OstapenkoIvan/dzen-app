@@ -93,7 +93,7 @@ function ModalComponent({ order, price, onClose }: IOrderModal) {
             <Typography variant="subtitle1">{order.description}</Typography>
           </Box>
           <Box sx={{ ml: "auto" }}>
-            <Typography variant="subtitle1">
+            <Typography variant="caption">
               {day} / {month} / {year}
             </Typography>
           </Box>

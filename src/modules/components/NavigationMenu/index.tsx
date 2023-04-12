@@ -23,6 +23,7 @@ function NavigationMenu() {
           width: "200px",
           alignItems: "center",
           flexDirection: "column",
+          flexShrink: 0,
         }}
       >
         <UserAvatar />

@@ -8,6 +8,10 @@ function TopMenu() {
     dateStyle: "medium",
   }).format(new Date());
 
+  const currentWeekday = new Intl.DateTimeFormat("ru", {
+    weekday: "long",
+  }).format(new Date());
+
   return (
     <>
       <Toolbar
@@ -36,7 +40,7 @@ function TopMenu() {
         />
         <Box sx={{ display: "flex", marginLeft: "auto", gap: 2 }}>
           <Box sx={{}}>
-            <Typography>Today</Typography>
+            <Typography>{currentWeekday}</Typography>
             <Typography>{currentDate}</Typography>
           </Box>
           <Box

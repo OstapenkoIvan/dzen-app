@@ -36,6 +36,11 @@ export interface IOrderItem {
   productsCount: number;
 }
 
+export interface IProductOrderItem {
+  order: IOrder;
+  productsCount: number;
+}
+
 export interface IOrderModal {
   order: IOrder;
   price: { USD?: number | undefined; UAH?: number | undefined };
