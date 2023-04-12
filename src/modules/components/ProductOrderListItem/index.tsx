@@ -1,20 +1,13 @@
-import { useState } from "react";
-import { ListItem, Box, Typography, IconButton } from "@mui/material";
+import { ListItem, Typography, IconButton, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { removeProduct } from "../../../store/products";
 import { useAppDispatch } from "../../../hooks/redux";
 import ModalProductComponent from "../ModalProductComponent";
+import { IProduct } from "../../../types";
+import { useState } from "react";
 
-import { IOrder, IProduct } from "../../../types";
-
-function OrderProductItem({
-  product,
-  order,
-}: {
-  product: IProduct;
-  order: IOrder;
-}) {
+function ProductOrderListItem({ product }: { product: IProduct }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -27,23 +20,18 @@ function OrderProductItem({
     dispatch(removeProduct(product.id));
   };
 
-  const currentDate = new Date(product.date);
-  const day = currentDate.getDate();
-  const month = new Intl.DateTimeFormat("ru", { month: "long" }).format(
-    currentDate
-  );
-  const year = currentDate.getFullYear();
-
   return (
     <ListItem
       sx={{
         flex: 1,
         justifyContent: "space-between",
-        border: "1px solid #ccc",
-        borderRadius: 1,
         backgroundColor: "#fff",
         ":hover": {
           boxShadow: "3px 3px 20px 1px rgba(0,0,0,0.55)",
+          zIndex: 2,
+        },
+        ":not(:last-child)": {
+          borderBottom: "1px solid #ccc",
         },
       }}
     >
@@ -99,49 +87,6 @@ function OrderProductItem({
           </Typography>
         )}
       </Box>
-
-      <Box sx={{ width: 100, mr: 2 }}>
-        <Typography variant="body2">
-          с{" "}
-          {new Intl.DateTimeFormat("en-GB").format(
-            new Date(product.guarantee.start)
-          )}
-        </Typography>
-        <Typography variant="body2">
-          по{" "}
-          {new Intl.DateTimeFormat("en-GB").format(
-            new Date(product.guarantee.end)
-          )}
-        </Typography>
-      </Box>
-      <Box sx={{ width: 50, mr: 2, textAlign: "center" }}>
-        {product.isNew ? (
-          <Typography variant="body2">Новый</Typography>
-        ) : (
-          <Typography variant="body2">Б/У</Typography>
-        )}
-      </Box>
-      <Box sx={{ textAlign: "left", mr: 2, width: 80 }}>
-        {product.price[0].value && (
-          <Typography variant="caption">{product.price[0].value} $</Typography>
-        )}
-        {product.price[1].value && (
-          <Typography variant="body2" sx={{ lineHeight: 1 }}>
-            {product.price[1].value} UAH
-          </Typography>
-        )}
-      </Box>
-      <Box sx={{ minWidth: 100, mr: 2 }}>
-        <Typography>{product.type ? product.type : "-"}</Typography>
-      </Box>
-      <Box sx={{ minWidth: 100, mr: 2 }}>
-        <Typography>{order.title ? order.title : "-"}</Typography>
-      </Box>
-      <Box sx={{ width: 110, mr: 2 }}>
-        <Typography variant="caption">
-          {day} / {month} / {year}
-        </Typography>
-      </Box>
       <IconButton aria-label="delete order" size="small" onClick={handleDelete}>
         <DeleteIcon fontSize="small" />
       </IconButton>
@@ -157,4 +102,4 @@ function OrderProductItem({
   );
 }
 
-export default OrderProductItem;
+export default ProductOrderListItem;
