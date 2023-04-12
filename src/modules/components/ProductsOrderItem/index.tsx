@@ -1,27 +1,19 @@
 import { useState } from "react";
-import {
-  ListItem,
-  ListItemText,
-  Box,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { ListItem, ListItemText, Box, Typography } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { IOrderItem } from "../../../types";
+import { IProductOrderItem } from "../../../types";
 import { getNoun } from "../../../helpers/getNoun";
 import { getOrderDate } from "../../../helpers/getDate";
-import ModalComponent from "../ModalComponent";
 
-function OrderItem({ order, price, productsCount }: IOrderItem) {
-  const [modalState, setModalState] = useState<boolean>(false);
+function OrderItem({ order, productsCount }: IProductOrderItem) {
+  const [isActive, setIsActive] = useState<number>(0);
 
   const { day, month, year } = getOrderDate(order.date);
 
-  const handleDelete = () => {
-    setModalState(true);
+  const handleClick = () => {
+    setIsActive(order.id);
   };
 
   return (
@@ -37,16 +29,12 @@ function OrderItem({ order, price, productsCount }: IOrderItem) {
         },
       }}
     >
-      <Link to={`/${order.id}`} state={{ order }}>
-        <ListItemText>{order.description}</ListItemText>
-      </Link>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 1,
           mr: 5,
-          ml: "auto",
           width: 120,
         }}
       >
@@ -82,20 +70,9 @@ function OrderItem({ order, price, productsCount }: IOrderItem) {
           {day} / {month} / {year}
         </Typography>
       </Box>
-      <Box sx={{ textAlign: "left", mr: 2, width: 200 }}>
-        {price.USD && <Typography variant="caption">{price.USD} $</Typography>}
-        {price.UAH && (
-          <Typography variant="subtitle1" sx={{ lineHeight: 1 }}>
-            {price.UAH} UAH
-          </Typography>
-        )}
+      <Box>
+        <ArrowForwardIosIcon />
       </Box>
-      <IconButton aria-label="delete order" size="small" onClick={handleDelete}>
-        <DeleteIcon fontSize="small" />
-      </IconButton>
-      {modalState && (
-        <ModalComponent onClose={setModalState} order={order} price={price} />
-      )}
     </ListItem>
   );
 }

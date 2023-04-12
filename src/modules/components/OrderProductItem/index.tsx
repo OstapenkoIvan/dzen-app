@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   ListItem,
   ListItemText,
@@ -36,6 +37,7 @@ function OrderProductItem({
     <ListItem
       sx={{
         flex: 1,
+        justifyContent: "space-between",
         border: "1px solid #ccc",
         borderRadius: 1,
         backgroundColor: "#fff",

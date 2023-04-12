@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+import { Dispatch } from "redux";
 export interface IOrder {
   id: number;
   title: string;
@@ -32,4 +34,15 @@ export interface IOrderItem {
   order: IOrder;
   price: { USD?: number | undefined; UAH?: number | undefined };
   productsCount: number;
+}
+
+export interface IProductOrderItem {
+  order: IOrder;
+  productsCount: number;
+}
+
+export interface IOrderModal {
+  order: IOrder;
+  price: { USD?: number | undefined; UAH?: number | undefined };
+  onClose: Dispatch<SetStateAction<any>>;
 }

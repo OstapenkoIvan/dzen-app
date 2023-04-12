@@ -26,10 +26,7 @@ function Orders() {
       </Box>
       <List sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         {orders.map((order) => {
-          const { price, productsCount, currentProducts } = orderProducts(
-            products,
-            order.id
-          );
+          const { price, productsCount } = orderProducts(products, order.id);
 
           return (
             <OrderItem
