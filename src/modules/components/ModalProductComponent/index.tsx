@@ -2,9 +2,6 @@ import { useEffect } from "react";
 
 import { Box, Typography, IconButton, Button } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { getOrderDate } from "../../../helpers/getDate";
-import { removeOrder } from "../../../store/products";
-import { useAppDispatch } from "../../../hooks/redux";
 
 import { IProductModal } from "../../../types";
 
