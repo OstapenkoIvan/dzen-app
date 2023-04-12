@@ -33,6 +33,10 @@ function ProductOrderListItem({ product }: { product: IProduct }) {
         ":not(:last-child)": {
           borderBottom: "1px solid #ccc",
         },
+        ":last-child": {
+          borderBottomRightRadius: 4,
+          borderBottomLeftRadius: 4,
+        },
       }}
     >
       <Box

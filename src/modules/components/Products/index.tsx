@@ -105,7 +105,7 @@ function Products() {
                   border: "1px solid #ccc",
                   borderRadius: 1,
                   backgroundColor: "#fff",
-                  overflow: "hidden",
+                  // overflow: "hidden",
                   flex: 1,
                 }}
               >
