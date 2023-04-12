@@ -7,10 +7,17 @@ import {
 } from "react-router-dom";
 
 import ErrorBoundary from "../../modules/components/ErrorBoundaries";
+// const ErrorBoundary = lazy(
+// () => import("../../modules/components/ErrorBoundaries")
+// );
 import SharedLayout from "../../modules/pages/SharedLayout";
 import Orders from "../../modules/components/Orders";
-import Products from "../../modules/components/Products";
-import OrderProducList from "../../modules/components/OrderProductList";
+// import Products from "../../modules/components/Products";
+const Products = lazy(() => import("../../modules/components/Products"));
+// import OrderProducList from "../../modules/components/OrderProductList";
+const OrderProducList = lazy(
+  () => import("../../modules/components/OrderProductList")
+);
 
 import { ROUTES } from "../../constants";
 
@@ -31,7 +38,9 @@ export const mainRouter = createBrowserRouter(
         path={ROUTES.orderId}
         element={
           <ErrorBoundary>
-            <OrderProducList />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <OrderProducList />
+            </Suspense>
           </ErrorBoundary>
         }
       />
@@ -39,23 +48,13 @@ export const mainRouter = createBrowserRouter(
         path={ROUTES.groups}
         element={
           <ErrorBoundary>
-            <Products />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <Products />
+            </Suspense>
           </ErrorBoundary>
         }
       />
     </Route>
-    // <Route>
-    //   <Route element={<SharedLayout />}>
-    //       <Route
-    //         path={ROUTES.orders}
-    //         element={
-    //           <ErrorBoundary>
-    //             <Orders />
-    //           </ErrorBoundary>
-    //         }
-    //       />
-    //     </Route>
-    // </Route>
   ),
   { basename: "/" }
 );
