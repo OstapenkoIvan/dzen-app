@@ -94,7 +94,12 @@ function OrderItem({ order, price, productsCount }: IOrderItem) {
         <DeleteIcon fontSize="small" />
       </IconButton>
       {modalState && (
-        <ModalComponent onClose={setModalState} order={order} price={price} />
+        <ModalComponent
+          setModalState={setModalState}
+          order={order}
+          price={price}
+          modalState={modalState}
+        />
       )}
     </ListItem>
   );

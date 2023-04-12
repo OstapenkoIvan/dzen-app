@@ -1,35 +1,25 @@
 import { useEffect } from "react";
 
-import {
-  ListItem,
-  ListItemText,
-  Box,
-  Typography,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { Box, Typography, IconButton, Button } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { getOrderDate } from "../../../helpers/getDate";
 import { removeOrder } from "../../../store/products";
 import { useAppDispatch } from "../../../hooks/redux";
 
-import { IOrderModal } from "../../../types";
+import { IProductModal } from "../../../types";
 
-function ModalComponent({
-  order,
-  price,
-  setModalState,
+function ModalProductComponent({
   modalState,
-}: IOrderModal) {
-  const { day, month, year } = getOrderDate(order.date);
-  const dispatch = useAppDispatch();
-
+  product,
+  setClose,
+  confirmDelete,
+}: IProductModal) {
   useEffect(() => {
     function handleToggleModalByEsc(evt: KeyboardEvent) {
       let { code } = evt;
 
       if (code === "Escape") {
-        setModalState(false);
+        setClose();
       }
     }
 
@@ -39,15 +29,14 @@ function ModalComponent({
     return () => {
       window.removeEventListener("keydown", handleToggleModalByEsc);
     };
-  }, [setModalState, modalState]);
+  }, [setClose, modalState]);
 
   const handleClose = () => {
-    setModalState(false);
+    setClose();
   };
 
   const handleDelete = () => {
-    dispatch(removeOrder(order.id));
-    setModalState(false);
+    confirmDelete();
   };
 
   return (
@@ -88,7 +77,7 @@ function ModalComponent({
               backgroundColor: "inherit",
             },
           }}
-          onClick={handleClose}
+          onClick={setClose}
         >
           <HighlightOffIcon fontSize="large" />
         </IconButton>
@@ -102,7 +91,7 @@ function ModalComponent({
           }}
         >
           <Typography variant="subtitle1">
-            Вы уверены, что хотите удалить этот приход?
+            Вы уверены, что хотите удалить этот товар?
           </Typography>
         </Box>
         <Box
@@ -110,25 +99,60 @@ function ModalComponent({
             display: "flex",
             alignItems: "center",
             gap: 2,
-            px: 3,
+            px: 1,
             height: 70,
           }}
         >
-          <Box>
-            <Typography variant="subtitle1">{order.description}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              height: 48,
+              width: 48,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                width: 12,
+                height: 12,
+                backgroundColor: product.isNew ? "#ADFF2F" : "#000",
+                borderRadius: "50%",
+              }}
+            ></Box>
           </Box>
-          <Box sx={{ ml: "auto" }}>
-            <Typography variant="caption">
-              {day} / {month} / {year}
-            </Typography>
+          <Box
+            component="img"
+            sx={{
+              height: 48,
+              width: 48,
+              mr: 2,
+            }}
+            alt={product.title}
+            src={product.photo}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              minWidth: "fit-content",
+              maxWidth: 400,
+              flexDirection: "column",
+              mb: 0,
+              mr: 2,
+            }}
+          >
+            <Typography variant="subtitle2">{product.title}</Typography>
+            <Typography variant="caption">{product.specification}</Typography>
           </Box>
-          <Box sx={{ textAlign: "left" }}>
-            {price.USD && (
-              <Typography variant="caption">{price.USD} $</Typography>
-            )}
-            {price.UAH && (
-              <Typography variant="subtitle1" sx={{ lineHeight: 1 }}>
-                {price.UAH} UAH
+          <Box sx={{ width: 85 }}>
+            {product.isNew ? (
+              <Typography variant="body2" color={"#ADFF2F"}>
+                Свободен
+              </Typography>
+            ) : (
+              <Typography variant="body2" color={"#000"}>
+                В ремонте
               </Typography>
             )}
           </Box>
@@ -160,4 +184,4 @@ function ModalComponent({
   );
 }
 
-export default ModalComponent;
+export default ModalProductComponent;

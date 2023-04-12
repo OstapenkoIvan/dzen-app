@@ -39,10 +39,19 @@ export interface IOrderItem {
 export interface IProductOrderItem {
   order: IOrder;
   productsCount: number;
+  isActive: number;
+  setIsActive: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface IOrderModal {
   order: IOrder;
   price: { USD?: number | undefined; UAH?: number | undefined };
-  onClose: Dispatch<SetStateAction<any>>;
+  modalState: boolean;
+  setModalState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface IProductModal {
+  modalState: boolean;
+  product: IProduct;
+  setClose: () => void;
+  confirmDelete: () => void;
 }

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ListItem, ListItemText, Box, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -7,13 +6,16 @@ import { IProductOrderItem } from "../../../types";
 import { getNoun } from "../../../helpers/getNoun";
 import { getOrderDate } from "../../../helpers/getDate";
 
-function OrderItem({ order, productsCount }: IProductOrderItem) {
-  const [isActive, setIsActive] = useState<number>(0);
-
+function OrderItem({
+  order,
+  productsCount,
+  isActive,
+  setIsActive,
+}: IProductOrderItem) {
   const { day, month, year } = getOrderDate(order.date);
 
   const handleClick = () => {
-    setIsActive(order.id);
+    isActive === order.id ? setIsActive(0) : setIsActive(order.id);
   };
 
   return (
@@ -24,10 +26,13 @@ function OrderItem({ order, productsCount }: IProductOrderItem) {
         border: "1px solid #ccc",
         borderRadius: 1,
         backgroundColor: "#fff",
+        overflow: "hidden",
+        cursor: "pointer",
         ":hover": {
           boxShadow: "3px 3px 20px 1px rgba(0,0,0,0.55)",
         },
       }}
+      onClick={handleClick}
     >
       <Box
         sx={{
@@ -70,9 +75,24 @@ function OrderItem({ order, productsCount }: IProductOrderItem) {
           {day} / {month} / {year}
         </Typography>
       </Box>
-      <Box>
-        <ArrowForwardIosIcon />
-      </Box>
+      {isActive === order.id && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#ccc",
+            color: "#fff",
+            position: "absolute",
+            top: 0,
+            right: 0,
+            height: 66,
+            width: 30,
+          }}
+        >
+          <ArrowForwardIosIcon />
+        </Box>
+      )}
     </ListItem>
   );
 }

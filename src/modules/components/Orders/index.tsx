@@ -1,4 +1,4 @@
-import { List, Box, Typography } from "@mui/material";
+import { List, Box, Typography, IconButton } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import { ordersSelector, productsSelector } from "../../../store/products";
 
@@ -21,10 +21,14 @@ function Orders() {
           width: "100%",
         }}
       >
-        <AddCircleIcon />
+        <IconButton>
+          <AddCircleIcon fontSize="medium" sx={{ color: "#cc5a2a" }} />
+        </IconButton>
         <Typography variant="h5">Приходы / {orders.length}</Typography>
       </Box>
-      <List sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+      <List
+        sx={{ display: "flex", flexDirection: "column", gap: 1, py: 0, mt: 2 }}
+      >
         {orders.map((order) => {
           const { price, productsCount } = orderProducts(products, order.id);
 
