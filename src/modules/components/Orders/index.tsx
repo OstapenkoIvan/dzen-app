@@ -2,6 +2,9 @@ import { List, Box, Typography, IconButton } from "@mui/material";
 import { useAppSelector } from "../../../hooks/redux";
 import { ordersSelector, productsSelector } from "../../../store/products";
 
+import { motion } from "framer-motion";
+import { routeVariants } from "../../../constants/motionVariants";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import OrderItem from "../OrderItem";
 import { orderProducts } from "../../../helpers/orderProducts";
@@ -11,7 +14,12 @@ function Orders() {
   const products = useAppSelector(productsSelector);
 
   return (
-    <>
+    <motion.div
+      variants={routeVariants}
+      initial="initial"
+      animate="final"
+      exit="exit"
+    >
       <Box
         sx={{
           display: "flex",
@@ -27,7 +35,13 @@ function Orders() {
         <Typography variant="h5">Приходы / {orders.length}</Typography>
       </Box>
       <List
-        sx={{ display: "flex", flexDirection: "column", gap: 1, py: 0, mt: 2 }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
+          py: 0,
+          mt: 2,
+        }}
       >
         {orders.map((order) => {
           const { price, productsCount } = orderProducts(products, order.id);
@@ -42,7 +56,7 @@ function Orders() {
           );
         })}
       </List>
-    </>
+    </motion.div>
   );
 }
 

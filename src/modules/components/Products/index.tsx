@@ -10,6 +10,9 @@ import {
 import { useAppSelector } from "../../../hooks/redux";
 import { ordersSelector, productsSelector } from "../../../store/products";
 
+import { motion } from "framer-motion";
+import { routeVariants } from "../../../constants/motionVariants";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ProductsOrderItem from "../ProductsOrderItem";
@@ -29,7 +32,7 @@ function Products() {
   };
 
   return (
-    <>
+    <motion.div variants={routeVariants} initial="initial" animate="final">
       <Box>
         <Box
           sx={{
@@ -72,69 +75,82 @@ function Products() {
           </List>
 
           {isActive > 0 && (
-            <Box
-              sx={{
+            <motion.div
+              variants={routeVariants}
+              initial="initial"
+              animate="final"
+              style={{
                 display: "flex",
-                position: "relative",
-                height: "fit-content",
                 flex: 1,
               }}
             >
-              <IconButton
-                sx={{
-                  position: "absolute",
-                  top: -16,
-                  right: -16,
-                  height: 32,
-                  width: 32,
-                  backgroundColor: "#fff",
-                  boxShadow: "3px 3px 20px 1px rgba(0,0,0,0.55)",
-                  zIndex: 1,
-                  ":hover": {
-                    backgroundColor: "#fff",
-                  },
-                }}
-                onClick={handleClose}
-              >
-                <HighlightOffIcon fontSize="large" />
-              </IconButton>
               <Box
                 sx={{
+                  display: "flex",
+                  position: "relative",
                   height: "fit-content",
-                  width: "fit-content",
-                  border: "1px solid #ccc",
-                  borderRadius: 1,
-                  backgroundColor: "#fff",
-                  // overflow: "hidden",
                   flex: 1,
                 }}
               >
+                <IconButton
+                  sx={{
+                    position: "absolute",
+                    top: -16,
+                    right: -16,
+                    height: 32,
+                    width: 32,
+                    backgroundColor: "#fff",
+                    boxShadow: "3px 3px 20px 1px rgba(0,0,0,0.55)",
+                    zIndex: 1,
+                    ":hover": {
+                      backgroundColor: "#fff",
+                    },
+                  }}
+                  onClick={handleClose}
+                >
+                  <HighlightOffIcon fontSize="large" />
+                </IconButton>
                 <Box
                   sx={{
-                    px: 4,
-                    py: 3,
-                    borderBottom: "1px solid #ccc",
+                    height: "fit-content",
+                    width: "fit-content",
+                    border: "1px solid #ccc",
+                    borderRadius: 1,
+                    backgroundColor: "#fff",
+                    // overflow: "hidden",
+                    flex: 1,
                   }}
                 >
-                  <Typography>{currentOrder?.title}</Typography>
-                  <Button
-                    startIcon={<AddCircleIcon fontSize="small" />}
-                    sx={{ color: "#cc5a2a" }}
+                  <Box
+                    sx={{
+                      px: 4,
+                      py: 3,
+                      borderBottom: "1px solid #ccc",
+                    }}
                   >
-                    Добавить продукт
-                  </Button>
+                    <Typography>{currentOrder?.title}</Typography>
+                    <Button
+                      startIcon={<AddCircleIcon fontSize="small" />}
+                      sx={{ color: "#cc5a2a" }}
+                    >
+                      Добавить продукт
+                    </Button>
+                  </Box>
+                  <List disablePadding>
+                    {currentProducts.map((product) => (
+                      <ProductOrderListItem
+                        product={product}
+                        key={product.id}
+                      />
+                    ))}
+                  </List>
                 </Box>
-                <List disablePadding>
-                  {currentProducts.map((product) => (
-                    <ProductOrderListItem product={product} key={product.id} />
-                  ))}
-                </List>
               </Box>
-            </Box>
+            </motion.div>
           )}
         </Box>
       </Box>
-    </>
+    </motion.div>
   );
 }
 

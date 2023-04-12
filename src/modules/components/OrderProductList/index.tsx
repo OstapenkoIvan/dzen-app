@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { routeVariants } from "../../../constants/motionVariants";
 
 import { useAppSelector } from "../../../hooks/redux";
 import { ordersProductSelector } from "../../../store/products";
@@ -34,7 +36,7 @@ function OrderProducList() {
   };
 
   return (
-    <>
+    <motion.div variants={routeVariants} initial="initial" animate="final">
       <Box
         sx={{
           display: "flex",
@@ -70,7 +72,7 @@ function OrderProducList() {
           <OrderProductItem product={product} key={product.id} order={order} />
         ))}
       </List>
-    </>
+    </motion.div>
   );
 }
 
